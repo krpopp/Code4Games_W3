@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerControl : MonoBehaviour
 {
+
+    int health = 10;
+    public TMP_Text healthText;
 
     public float speed = 5f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        healthText.text = health.ToString();
     }
 
     // Update is called once per frame
@@ -42,4 +46,15 @@ public class PlayerControl : MonoBehaviour
     //    int sum = a + b;
     //    return sum;
     //}
+
+    void OnCollisionEnter(Collision otherThing)
+    {
+        Debug.Log(otherThing.gameObject.name);
+        if(otherThing.gameObject.name == "Enemy")
+        {
+            health--;
+            healthText.text = health.ToString();
+        }
+    }
+
 }
